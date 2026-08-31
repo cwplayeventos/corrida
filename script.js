@@ -2,7 +2,7 @@
   Configure antes de publicar:
   const API_URL = "https://SEU-BACKEND.com/api";
 */
-const API_URL = "COLE_AQUI_A_URL_DO_BACKEND/api";
+const API_URL = "https://corrida-hcgm.onrender.com/api";
 const CONFIG={kits:[
 {id:"basico",name:"Corrida / Caminhada",price:19.90,medal:false,shirt:false,description:"Somente participação na corrida ou caminhada."},
 {id:"medalha",name:"Com Medalha",price:39.90,medal:true,shirt:false,description:"Participação + medalha."},

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Corrida Beneficente Guerreiros do Baca</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+<nav class="nav container">
+<a class="brand" href="#"><img src="assets/logo.png" alt="Guerreiros do Baca"></a>
+<a href="#inscricao" class="nav-btn">INSCREVA-SE</a>
+</nav>
+<div class="hero-content container">
+<img class="hero-logo" src="assets/logo.png" alt="Guerreiros do Baca">
+<p class="eyebrow">18 DE OUTUBRO DE 2026 • 7H30</p>
+<h1>Corrida Beneficente<br><strong>Guerreiros do Baca</strong></h1>
+<p class="hero-sub">Corra, caminhe e faça parte dessa causa.</p>
+<div class="hero-actions"><a href="#inscricao" class="btn btn-primary">QUERO ME INSCREVER</a><a href="#kits" class="btn btn-outline">VER VALORES</a></div>
+</div>
+</header>
+<section class="info-strip"><div class="container info-grid">
+<div><strong>18/10/2026</strong><span>Data</span></div><div><strong>7h30</strong><span>Largada</span></div><div><strong>2,5 KM</strong><span>Distância</span></div><div><strong>5 KM</strong><span>Distância</span></div>
+</div></section>
+<main>
+<section id="kits" class="section"><div class="container">
+<p class="eyebrow dark">ESCOLHA SEU KIT</p><h2>Três opções para participar</h2><div id="kitCards" class="cards"></div>
+</div></section>
+<section class="section section-alt"><div class="container two-cols">
+<div><p class="eyebrow dark">A PROVA</p><h2>Corra ou caminhe por uma boa causa.</h2><p>Escolha entre 2,5 km e 5 km e participe da Corrida Beneficente Guerreiros do Baca. Cadastre uma ou várias pessoas em uma única inscrição.</p></div>
+<div class="event-card"><div><span>Data</span><strong>18 de outubro de 2026</strong></div><div><span>Horário</span><strong>7h30</strong></div><div><span>Local</span><strong>A definir</strong></div></div>
+</div></section>
+<section id="inscricao" class="section"><div class="container form-container">
+<p class="eyebrow dark">INSCRIÇÃO</p><h2>Monte sua inscrição</h2><p class="muted">Cada participante terá seus próprios dados, distância, modalidade e kit.</p>
+<div class="quantity-box"><div><strong>Participantes</strong><span>Adicione ou remova pessoas</span></div><div class="stepper"><button id="minusParticipant" type="button">−</button><strong id="participantCount">1</strong><button id="plusParticipant" type="button">+</button></div></div>
+<form id="registrationForm" novalidate><div id="participants"></div>
+<div class="summary"><div><span>Participantes</span><strong id="summaryCount">1</strong></div><div><span>Total</span><strong id="summaryTotal">R$ 19,90</strong></div></div>
+<div class="responsible"><h3>Responsável pelo pagamento</h3><label>Nome do responsável<input id="responsibleName" required autocomplete="name"></label><label>WhatsApp<input id="responsibleWhatsapp" required autocomplete="tel"></label><label>E-mail para receber o comprovante (opcional)<input id="responsibleEmail" type="email" autocomplete="email"></label></div>
+<label class="accept"><input id="accept" type="checkbox" required> Declaro que os dados informados estão corretos.</label>
+<button class="btn btn-primary full" id="submitBtn" type="submit">GERAR PAGAMENTO PIX</button><p id="formMessage" class="form-message"></p>
+</form></div></section>
+<section id="payment" class="section payment-section hidden"><div class="container payment-card">
+<p class="eyebrow dark">PAGAMENTO PIX</p><h2>Finalize sua inscrição</h2>
+<p id="paymentStatusText">Escaneie o QR Code ou use o Pix Copia e Cola.</p>
+<div class="payment-total" id="paymentTotal">R$ 0,00</div>
+<div class="payment-id">Inscrição <strong id="registrationId">GDB-000000</strong></div>
+<div class="qr-wrap"><img id="qrCode" alt="QR Code Pix"></div>
+<div class="pix-box"><span>Pix Copia e Cola</span><div class="pix-row"><code id="pixCode"></code><button id="copyPix" class="copy-btn" type="button">COPIAR</button></div></div>
+<div class="countdown">Cobrança expira em <strong id="countdown">--:--</strong></div>
+<div id="paidBox" class="paid-box hidden"><strong>✓ PAGAMENTO CONFIRMADO!</strong><span>Sua inscrição foi confirmada automaticamente.</span></div>
+<button id="newPixBtn" type="button" class="btn btn-outline dark-btn hidden">GERAR NOVO PIX</button>
+<p id="paymentMessage" class="form-message"></p>
+</div></section>
+</main>
+<footer><div class="container"><strong>Corrida Beneficente Guerreiros do Baca</strong><span>18 de outubro de 2026 • 7h30</span></div></footer>
+<script src="script.js"></script>
+</body></html>

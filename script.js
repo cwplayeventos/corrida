@@ -6,7 +6,7 @@ const API_URL = "https://corrida-hcgm.onrender.com/api";
 const CONFIG={kits:[
 {id:"basico",name:"Corrida / Caminhada",price:19.90,medal:false,shirt:false,description:"Somente participação na corrida ou caminhada."},
 {id:"medalha",name:"Com Medalha",price:39.90,medal:true,shirt:false,description:"Participação + medalha."},
-{id:"completo",name:"Kit Completo",price:59.90,medal:true,shirt:true,description:"Participação + medalha + camiseta unissex."}],
+{id:"completo",name:"Kit Completo",price:69.90,medal:true,shirt:true,description:"Participação + medalha + camiseta unissex."}],
 distances:["2,5 km","5 km"],modes:["Corrida","Caminhada"],shirts:["PP","P","M","G","GG","XGG"]};
 const state={participants:[],payment:null,timer:null,poll:null};
 const money=v=>v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});

@@ -4,14 +4,14 @@
 */
 const API_URL = "https://corrida-hcgm.onrender.com/api";
 const CONFIG={kits:[
-{id:"basico",name:"Corrida / Caminhada",price:19.90,medal:false,shirt:false,description:"Somente participação na corrida ou caminhada."},
-{id:"medalha",name:"Com Medalha",price:39.90,medal:true,shirt:false,description:"Participação + medalha."},
-{id:"completo",name:"Kit Completo",price:69.90,medal:true,shirt:true,description:"Participação + medalha + camiseta unissex."}],
+{id:"basico",name:"Corrida / Caminhada",price:19.90,limit:false,medal:false,shirt:false,description:"Somente participação na corrida ou caminhada."},
+{id:"medalha",name:"Com Medalha",price:39.90,limit:false,medal:true,shirt:false,description:"Participação + medalha."},
+{id:"completo",name:"Kit Completo",price:69.90,limit:true,medal:true,shirt:true,description:"Participação + medalha + camiseta unissex."}],
 distances:["2,5 km","5 km"],modes:["Corrida","Caminhada"],shirts:["PP","P","M","G","GG","XGG"]};
 const state={participants:[],payment:null,timer:null,poll:null};
 const money=v=>v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 const esc=v=>String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
-function renderKits(){document.getElementById("kitCards").innerHTML=CONFIG.kits.map((k,i)=>`<article class="kit-card ${i===2?"featured":""}"><h3>${k.name}</h3><div class="price">${money(k.price)}</div><p>${k.description}</p><ul><li>INSCRIÇÕES LIMITADAS</li><li>2,5 km ou 5 km</li><li>Corrida ou caminhada</li>${k.medal?"<li>Medalha inclusa</li>":""}${k.shirt?"<li>Camiseta unissex</li>":""}</ul><a href="#inscricao" class="btn btn-primary">SELECIONAR</a></article>`).join("")}
+function renderKits(){document.getElementById("kitCards").innerHTML=CONFIG.kits.map((k,i)=>`<article class="kit-card ${i===2?"featured":""}"><h3>${k.name}</h3><div class="price">${money(k.price)}</div><p>${k.description}</p><ul>${k.limit?"<li>INSCRIÇÕES LIMITADAS</li>":""<li>2,5 km ou 5 km</li><li>Corrida ou caminhada</li>${k.medal?"<li>Medalha inclusa</li>":""}${k.shirt?"<li>Camiseta unissex</li>":""}</ul><a href="#inscricao" class="btn btn-primary">SELECIONAR</a></article>`).join("")}
 function participant(){return{name:"",whatsapp:"",mode:"Corrida",distance:"2,5 km",kitId:"basico",shirt:""}}
 function renderParticipants(){const c=document.getElementById("participants");c.innerHTML=state.participants.map((p,i)=>{const k=CONFIG.kits.find(x=>x.id===p.kitId)||CONFIG.kits[0];return `<article class="participant" data-index="${i}"><div class="participant-head"><h3>Participante ${i+1}</h3><span>${money(k.price)}</span></div><div class="fields">
 <label>Nome completo<input data-field="name" value="${esc(p.name)}" required></label>

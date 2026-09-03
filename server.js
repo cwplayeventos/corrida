@@ -28,7 +28,7 @@ const kits = {
 
   completo: {
     name: "Kit Completo",
-    price: 59.90,
+    price: 69.90,
     shirt: true
   }
 };

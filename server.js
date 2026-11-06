@@ -9,6 +9,18 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+
+/* PRAZO DE INSCRIÇÕES
+   26/11/2026 às 23:59:59 - Brasília
+*/
+const INSCRICOES_ENCERRAM_EM =
+  new Date("2026-11-27T00:00:00-03:00");
+
+function inscricoesEncerradas() {
+  return Date.now() >= INSCRICOES_ENCERRAM_EM.getTime();
+}
+
+
 /* =========================================================
    CONFIGURAÇÕES
 ========================================================= */
@@ -755,6 +767,17 @@ app.post(
   async (req, res) => {
 
     try {
+
+       
+      /* VERIFICAR PRAZO DE INSCRIÇÕES */
+      if (inscricoesEncerradas()) {
+        return res.status(403).json({
+          success: false,
+          message:
+            "As inscrições para a Corrida Beneficente foram encerradas em 26/11/2026."
+        });
+      }
+
 
       const {
         responsible,

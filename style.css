@@ -4,7 +4,8 @@
 @media(max-width:800px){.cards,.two-cols{grid-template-columns:1fr}.kit-card.featured{transform:none}.info-grid{grid-template-columns:1fr 1fr}.fields,.responsible{grid-template-columns:1fr}.hero{min-height:610px}.hero-content{padding-bottom:60px}.nav-btn{display:none}}
 
 
-/* MARCA-D'ÁGUA DA CORRIDA */
+
+/* MARCA-D'ÁGUA - CORRIDA BENEFICENTE */
 
 .hero {
   position: relative;
@@ -15,28 +16,23 @@
   content: "";
   position: absolute;
   inset: 0;
-
   background-image: url("./logocor.png");
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center;
   background-size: min(75%, 850px) auto;
-
-  opacity: 0.15;
+  opacity: 0.18;
   pointer-events: none;
   z-index: 0;
 }
 
-/* Conteúdo sempre acima da marca-d'água */
 .hero > * {
   position: relative;
   z-index: 1;
 }
 
-/* Celulares */
 @media (max-width: 800px) {
   .hero::before {
     background-size: 95% auto;
-    opacity: 0.12;
+    opacity: 0.15;
   }
 }
-

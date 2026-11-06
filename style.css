@@ -615,3 +615,12 @@ footer span { color: #aaa; }
     opacity: .15;
   }
 }
+
+.hero {
+  outline: 5px solid lime !important;
+}
+
+.hero::before {
+  background-image: url("/corrida/assets/logocor.png") !important;
+  opacity: 0.5 !important;
+}

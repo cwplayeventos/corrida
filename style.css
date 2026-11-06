@@ -53,7 +53,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("./logocor.png");
+  background-image: url("./assets/logocor.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: min(75%, 850px) auto;

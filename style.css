@@ -620,7 +620,16 @@ footer span { color: #aaa; }
   outline: 5px solid lime !important;
 }
 
+
+/* AJUSTE FINAL DA MARCA-D'ÁGUA */
+
 .hero::before {
   background-image: url("/corrida/assets/logocor.png") !important;
-  opacity: 0.5 !important;
+  opacity: 0.18 !important;
+}
+
+@media (max-width: 800px) {
+  .hero::before {
+    opacity: 0.15 !important;
+  }
 }

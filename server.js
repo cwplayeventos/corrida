@@ -1175,6 +1175,17 @@ app.post(
 
     try {
 
+       
+      /* BLOQUEAR NOVOS PIX APÓS 26/11/2026 */
+      if (inscricoesEncerradas()) {
+        return res.status(403).json({
+          success: false,
+          message:
+            "O prazo para gerar pagamentos PIX foi encerrado em 26/11/2026."
+        });
+      }
+
+
       if (
         !process.env.GOOGLE_SHEET_ID
       ) {

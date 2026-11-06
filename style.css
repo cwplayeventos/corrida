@@ -36,3 +36,33 @@
     opacity: 0.15;
   }
 }
+
+
+/* MARCA-D'ÁGUA CENTRALIZADA */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("./logocor.png") center center / 75% auto no-repeat;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 800px) {
+  .hero::before {
+    background-size: 95% auto;
+    opacity: 0.15;
+  }
+}

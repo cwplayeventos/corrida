@@ -625,6 +625,40 @@ footer span { color: #aaa; }
   opacity: 0.18 !important;
 }
 
+
+
+/* KIT COMPLETO ESGOTADO */
+
+.kit-card.sold-out {
+  position: relative;
+  overflow: hidden;
+}
+
+.kit-card.sold-out::before {
+  content: "ESGOTADO";
+  position: absolute;
+  top: 22px;
+  right: -42px;
+  width: 170px;
+  padding: 9px 0;
+  background: #b51212;
+  color: #fff;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  transform: rotate(38deg);
+  z-index: 2;
+  box-shadow: 0 3px 10px rgba(0,0,0,.2);
+}
+
+.btn-sold-out {
+  background: #777;
+  color: #fff;
+  cursor: not-allowed;
+  opacity: .85;
+}
+
 @media (max-width: 800px) {
   .hero::before {
     opacity: 0.15 !important;

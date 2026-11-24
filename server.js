@@ -847,6 +847,15 @@ app.post(
           })
         );
 
+/* BLOQUEIO DO KIT COMPLETO ESGOTADO */
+
+if (normalized.some(participant => participant.kitId === "completo")) {
+  return res.status(400).json({
+    success: false,
+    message: "O Kit Completo está esgotado e não aceita novas inscrições."
+  });
+}
+
 
       /* -----------------------------
          CAMPOS OBRIGATÓRIOS

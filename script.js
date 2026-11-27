@@ -1,5 +1,6 @@
 
 const API_URL = "https://corrida-hcgm.onrender.com/api";
+const INSCRICOES_ENCERRADAS = true;
 
 const CONFIG = {
   kits: [
@@ -74,7 +75,7 @@ function renderKits() {
           ${
             soldOut
               ? '<span class="btn btn-sold-out" aria-disabled="true">ESGOTADO</span>'
-              : '<a href="#inscricao" class="btn btn-primary">SELECIONAR</a>'
+              : '<span class="btn btn-sold-out" aria-disabled="true">INSCRIÇÕES ENCERRADAS</span>'
           }
         </article>
       `;
@@ -171,10 +172,19 @@ function renderParticipants() {
     card.addEventListener("change", changeParticipant);
   });
 
+  // Bloqueia todos os campos de inscrição após o encerramento.
+  if (INSCRICOES_ENCERRADAS) {
+    c.querySelectorAll("input, select, button").forEach(el => {
+      el.disabled = true;
+    });
+  }
+
   updateSummary();
 }
 
 function changeParticipant(e) {
+  if (INSCRICOES_ENCERRADAS) return;
+
   const card = e.currentTarget;
   const i = +card.dataset.index;
   const f = e.target.dataset.field;
@@ -208,6 +218,8 @@ function updateSummary() {
 }
 
 function qty(d) {
+  if (INSCRICOES_ENCERRADAS) return;
+
   const n = Math.max(1, Math.min(20, state.participants.length + d));
 
   if (n === state.participants.length) return;
@@ -223,6 +235,12 @@ function qty(d) {
 
 async function createPayment(e) {
   e.preventDefault();
+
+  if (INSCRICOES_ENCERRADAS) {
+    document.getElementById("formMessage").textContent =
+      "As inscrições para a Corrida Beneficente foram encerradas em 26/11/2026.";
+    return;
+  }
 
   const form = e.currentTarget;
 
@@ -304,7 +322,11 @@ function startCountdown(t) {
       clearInterval(state.timer);
       document.getElementById("paymentStatusText").textContent =
         "Esta cobrança expirou.";
-      document.getElementById("newPixBtn").classList.remove("hidden");
+
+      // Não oferece novo PIX após o encerramento das inscrições.
+      if (!INSCRICOES_ENCERRADAS) {
+        document.getElementById("newPixBtn").classList.remove("hidden");
+      }
     }
   }, 1000);
 }
@@ -338,6 +360,13 @@ function startPolling() {
 }
 
 async function newPix() {
+  if (INSCRICOES_ENCERRADAS) {
+    document.getElementById("paymentMessage").textContent =
+      "O prazo para gerar novos pagamentos PIX foi encerrado em 26/11/2026.";
+    document.getElementById("newPixBtn").classList.add("hidden");
+    return;
+  }
+
   if (!state.payment) return;
 
   document.getElementById("newPixBtn").classList.add("hidden");
@@ -367,10 +396,33 @@ document.addEventListener("DOMContentLoaded", () => {
   state.participants = [participant()];
   renderParticipants();
 
-  document.getElementById("plusParticipant").onclick = () => qty(1);
-  document.getElementById("minusParticipant").onclick = () => qty(-1);
-  document.getElementById("registrationForm").onsubmit = createPayment;
-  document.getElementById("newPixBtn").onclick = newPix;
+  const plusBtn = document.getElementById("plusParticipant");
+  const minusBtn = document.getElementById("minusParticipant");
+  const form = document.getElementById("registrationForm");
+  const submitBtn = document.getElementById("submitBtn");
+  const newPixBtn = document.getElementById("newPixBtn");
+
+  plusBtn.onclick = () => qty(1);
+  minusBtn.onclick = () => qty(-1);
+
+  form.onsubmit = createPayment;
+  newPixBtn.onclick = newPix;
+
+  if (INSCRICOES_ENCERRADAS) {
+    // Desativa os controles de novas inscrições.
+    form.querySelectorAll("input, select, textarea, button").forEach(el => {
+      el.disabled = true;
+    });
+
+    plusBtn.disabled = true;
+    minusBtn.disabled = true;
+    submitBtn.disabled = true;
+
+    submitBtn.textContent = "INSCRIÇÕES ENCERRADAS";
+
+    // O botão de novo PIX não deve aparecer após o encerramento.
+    newPixBtn.classList.add("hidden");
+  }
 
   document.getElementById("copyPix").onclick = async () => {
     await navigator.clipboard.writeText(
